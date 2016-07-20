@@ -1,0 +1,33 @@
+%h1 Listing attachments
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th File
+      %th Attached item
+      %th Attached item type
+      %th Original filename
+      %th Content type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @attachments.each do |attachment|
+      %tr
+        %td= attachment.name
+        %td= attachment.description
+        %td= attachment.file
+        %td= attachment.attached_item_id
+        %td= attachment.attached_item_type
+        %td= attachment.original_filename
+        %td= attachment.content_type
+        %td= link_to 'Show', attachment
+        %td= link_to 'Edit', edit_attachment_path(attachment)
+        %td= link_to 'Destroy', attachment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Attachment', new_attachment_path

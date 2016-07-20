@@ -1,0 +1,33 @@
+%br
+- unless @commodity_items.blank?
+  %table.table
+    %thead
+      %tr
+        %th Gross
+        %th Tare
+        %th Price
+        %th Total
+        %th Commodity
+        %th Transaction
+        %th
+        %th
+        %th
+
+    %tbody
+      - @commodity_items.each do |commodity_item|
+        %tr
+          %td= commodity_item.gross
+          %td= commodity_item.tare
+          %td= commodity_item.price
+          %td= commodity_item.total
+          %td= commodity_item.commodity.name
+          %td= commodity_item.transaction_id
+          %td= link_to 'Show', commodity_item
+          %td= link_to 'Edit', edit_commodity_item_path(commodity_item)
+          %td= link_to 'Destroy', commodity_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+- else
+  %p.lead No commodity items yet
+
+%br
+
+= link_to 'New Commodity item', new_commodity_item_path

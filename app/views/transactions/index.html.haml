@@ -1,0 +1,36 @@
+%br
+- unless @transactions.blank?
+  %table.table
+    %thead
+      %tr
+        %th Customer
+        %th User
+        %th Category
+        %th Status
+        %th Discount
+        %th Tax
+        %th Total
+        %th
+        %th
+        %th
+
+    %tbody
+      - @transactions.each do |transaction|
+        %tr
+          %td= transaction.customer.full_name
+          %td= transaction.user.full_name
+          %td= transaction.category
+          %td= transaction.status
+          %td= number_to_currency(transaction.discount)
+          %td= number_to_currency(transaction.tax_amount)
+          %td= number_to_currency(transaction.total)
+          %td= link_to 'Show', transaction
+          %td= link_to 'Edit', edit_transaction_path(transaction)
+          %td= link_to 'Destroy', transaction, :method => :delete, :data => { :confirm => 'Are you sure?' }
+- else
+  %p.lead No transactions
+
+%br
+= render 'new_transaction_modal'
+%a{:href => "#", "data-toggle" => "modal", "data-target" => "#new_transaction", :role => "button"} New Transaction
+=# link_to 'New Transaction', new_transaction_path

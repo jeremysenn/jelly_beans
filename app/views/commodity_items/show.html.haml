@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Gross:
+  = @commodity_item.gross
+%p
+  %b Tare:
+  = @commodity_item.tare
+%p
+  %b Price:
+  = @commodity_item.price
+%p
+  %b Total:
+  = @commodity_item.total
+%p
+  %b Commodity:
+  = @commodity_item.commodity_id
+%p
+  %b Transaction:
+  = @commodity_item.transaction_id
+
+= link_to 'Edit', edit_commodity_item_path(@commodity_item)
+\|
+= link_to 'Back', commodity_items_path

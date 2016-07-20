@@ -1,0 +1,12 @@
+.jumbotron.jumbotron-fluid.text-xs-center{style: 'background-color: white;'}
+  - unless logged_in?
+    %h1.display-3 
+      %i.fa.fa-plus-square.text-primary
+      Jelly Bean
+    %p.lead A bean-shaped candy with a jellylike center and a firm sugar coating.
+  - else
+    %h1.display-3
+      %i.fa.fa-plus-square.text-primary
+      = current_company.name
+    -#
+      %p.lead A bean-shaped candy with a jellylike center and a firm sugar coating.

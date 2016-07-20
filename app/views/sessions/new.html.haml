@@ -1,0 +1,23 @@
+.jumbotron{style: 'background-color: white;'}
+  .container
+    .card.card-block.col-sm-6.col-md-4.col-md-offset-4
+      %div.text-xs-center
+        %p.lead
+          %i.fa.fa-plus-square.text-primary
+          Jelly Bean
+      = form_tag sessions_path, class: 'form-horizontal' do
+        .row.form-group
+          %div{:class => "col-sm-12 col-md-12"}
+            = text_field_tag :email, nil, :placeholder => "Email", :class => "form-control form-control-lg", autofocus: true
+        -#
+          .row.form-group
+            %div{:class => "col-sm-12 col-md-12"}
+              = password_field_tag :password, nil, :placeholder => "Password", :class => "form-control input-lg"
+        .row
+          %div{:class => "col-sm-12 col-md-12"}
+            = button_tag(:type => 'submit', :class => 'btn btn-block btn-lg btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Sign In"}) do
+              Log In
+      %br
+      %p=# link_to 'Sign Up', signup_path
+      %p=# link_to "Didn't receive confirmation instructions?", resend_confirmation_instructions_users_path
+      %p=# link_to "Forgot password?", new_password_reset_path

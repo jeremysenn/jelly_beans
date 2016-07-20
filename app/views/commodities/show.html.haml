@@ -1,0 +1,24 @@
+.container
+
+  %p
+    %b Name:
+    = @commodity.name
+  %p
+    %b Price:
+    = number_to_currency(@commodity.price)
+  %p
+    %b Description:
+    = @commodity.description
+  %p
+    %b Unit of measure:
+    = units_of_measure_hash.key(@commodity.unit_of_measure)
+  %p
+    %b Category:
+    = @commodity.category
+  %p
+    %b Active:
+    = @commodity.active
+
+  = link_to 'Edit', edit_commodity_path(@commodity)
+  \|
+  = link_to 'Back', commodities_path

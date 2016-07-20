@@ -1,0 +1,11 @@
+%li.list-group-item 
+  = commodity_item.commodity.name
+  .pull-right
+    =# number_to_currency("#{commodity_item.total.blank? ? 0 : commodity_item.total}")
+    = number_to_currency(commodity_item.commodity.price)
+    %br
+    %small
+      .text-muted= link_to 'Remove', commodity_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  %br
+  %small
+    .text-muted= commodity_item.commodity.unit_of_measure

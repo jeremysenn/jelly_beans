@@ -1,0 +1,73 @@
+%br
+
+- unless @transaction.commodity_items.blank?
+  %div.card
+    %ul.list-group.list-group-flush#commodity_items
+      -# Expands to render commodity_items/commodity_item, collection: @transaction.commodity_items
+      = render @transaction.commodity_items
+- else
+  %p.lead No items yet
+   
+%div.row
+  .col-xs-12.col-md-4
+    %div.row
+      .col-xs-6
+        %a.btn.btn-warning-outline.btn-lg.btn-block{:href => "#", "data-toggle" => "modal", "data-target" => "#add_commodity_item", :role => "button"} Add
+      .col-xs-6
+        %a.btn.btn-success-outline.btn-lg.btn-block{:href => "#", "data-toggle" => "modal", "data-target" => "#change_customer", :role => "button"} Customer
+    %br
+    %div.row
+      .col-xs-6
+        %a.btn.btn-primary-outline.btn-lg.btn-block{:href => "#", "data-toggle" => "modal", "data-target" => "#change_discount", :role => "button"} Discount
+      .col-xs-6
+        %a.btn.btn-info-outline.btn-lg.btn-block{:href => "#", "data-toggle" => "modal", "data-target" => "#change_tax", :role => "button"} Tax
+    %br
+    %div.row
+      .col-xs-6
+        %a.btn.btn-secondary-outline.btn-lg.btn-block{:href => "#", "data-toggle" => "modal", "data-target" => "#attachment", :role => "button"} Attachment
+    %br
+  .col-xs-12.col-md-4
+    .card
+      %ul.list-group.list-group-flush
+        %li.list-group-item
+          Subtotal
+          .pull-right= number_to_currency(@transaction.sub_total)
+        %li.list-group-item
+          Discount
+          .pull-right= number_to_currency("#{@transaction.discount.blank? ? 0 : @transaction.discount}")
+        %li.list-group-item
+          = "Tax #{@transaction.tax.blank? ? '' : '(' + number_to_percentage(@transaction.tax, precision: 2) + ')'}"
+          .pull-right= number_to_currency(@transaction.tax_amount)
+  .col-xs-12.col-md-4
+    = form_for(@transaction, remote: true) do |form|
+      = form.hidden_field :status, value: 'Complete'
+      %button.btn.btn-primary.btn-lg.btn-block{:type => "submit"}
+        Charge
+        = number_to_currency(@transaction.sub_total - @transaction.discount - @transaction.tax_amount)
+    -#
+      .card.card-inverse.card-success.text-xs-center
+        .card-block
+          %blockquote.card-blockquote
+            %br
+            %p 
+              Charge
+              = number_to_currency(@transaction.sub_total - @transaction.discount - @transaction.tax.to_d)
+
+        %br
+        -#
+          %footer
+            Customer:
+            = @transaction.customer.full_name
+
+= render 'commodity_item_modal'
+= render 'customer_modal'
+= render 'discount_modal'
+= render 'tax_modal'
+= render 'attachment_modal'
+
+-#
+  = render 'form'
+
+  = link_to 'Show', @transaction
+  \|
+  = link_to 'Back', transactions_path

@@ -1,0 +1,53 @@
+!!!
+%html
+  %head
+    %title JellyBeans
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
+      %button.navbar-toggler.hidden-sm-up{"data-target" => "#exCollapsingNavbar2", "data-toggle" => "collapse", :type => "button"}
+        \☰
+      #exCollapsingNavbar2.collapse.navbar-toggleable-xs
+        %a.navbar-brand{:href => root_path} 
+          %i.fa.fa-plus-square
+          Jelly Bean
+        %ul.nav.navbar-nav
+          - if logged_in?
+            %li.nav-item{class: "#{(params[:controller] == 'transactions') ? 'active' : ''}"}
+              = link_to 'Transactions', transactions_path, class: 'nav-link'
+            %li.nav-item{class: "#{(params[:controller] == 'customers') ? 'active' : ''}"}
+              = link_to 'Customers', customers_path, class: 'nav-link'
+            %li.nav-item{class: "#{(params[:controller] == 'commodities') ? 'active' : ''}"}
+              = link_to 'Commodities', commodities_path, class: 'nav-link'
+            %li.nav-item{class: "#{(params[:controller] == 'users') ? 'active' : ''}"}
+              = link_to 'Users', users_path, class: 'nav-link'
+          -#
+            %li.nav-item.active
+              %a.nav-link{:href => "#"}
+                Home
+                %span.sr-only (current)
+            %li.nav-item
+              %a.nav-link{:href => "#"} Features
+            %li.nav-item
+              %a.nav-link{:href => "#"} Pricing
+            %li.nav-item
+              %a.nav-link{:href => "#"} About
+          .pull-xs-right
+            %li.nav-item
+              = link_to 'Sign up', signup_path, class: 'nav-link' unless logged_in?
+            %li.nav-item
+              = link_to 'Sign in', login_path, class: 'nav-link' unless logged_in?
+            %li.nav-item
+              = link_to 'Sign out', logout_path, method: :delete, data: { confirm: 'Are you sure you want to sign out?' }, class: 'nav-link' if logged_in?
+            %li.nav-item
+              = link_to current_user.first_name, current_user, class: 'nav-link' if logged_in?
+        -#
+          %form.form-inline.pull-xs-right
+            %input.form-control{:placeholder => "Search", :type => "text"}/
+            %button.btn.btn-secondary-outline{:type => "submit"} Search
+    %div.container
+      - flash.each do |name, msg|
+        = content_tag(:div, msg, class: "alert alert-info")
+      = yield

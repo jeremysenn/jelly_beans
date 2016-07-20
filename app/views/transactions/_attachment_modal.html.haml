@@ -1,0 +1,19 @@
+#attachment.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "attachment_label", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-sm{:role => "document"}
+    .modal-content
+      .modal-body
+        = form_for Attachment.new do |form|
+          = form.hidden_field :attached_item_id, value: @transaction.id
+          = form.hidden_field :attached_item_type, value: @transaction.class.name
+          .form-group.row
+            .col-sm-12
+              = form.text_field :name, class: 'form-control form-control-lg', placeholder: 'Name'
+          .form-group.row
+            .col-sm-12
+              = form.text_area :description, class: 'form-control form-control-lg', placeholder: 'Description'
+          .form-group.row
+            .col-sm-12
+              = form.file_field :file
+          .modal-footer
+            %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Cancel
+            %button.btn.btn-primary{:type => "submit"} Save

@@ -1,0 +1,15 @@
+#change_customer.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "change_customer_label", :role => "dialog"}
+  .modal-dialog.modal-sm{:role => "document"}
+    .modal-content
+      -#
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#change_customer_label.modal-title Customer
+      .modal-body
+        = form_for(@transaction) do |form|
+          .form-group
+            = form.select :customer_id, options_from_collection_for_select(current_company.customers, :id, :full_name, @transaction.customer_id), {prompt: "Select customer"}, {style: 'width: 100%', :class => "form-control form-control-lg"}
+          .modal-footer
+            %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Cancel
+            %button.btn.btn-primary{:type => "submit"} Save

@@ -1,0 +1,19 @@
+#change_discount.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "change_discount_label", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-sm{:role => "document"}
+    .modal-content
+      -#
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#change_discount_label.modal-title Discount
+      .modal-body
+        = form_for(@transaction) do |form|
+          .form-group.row
+            .col-sm-12
+              .input-group
+                .input-group-addon 
+                  %i.fa.fa-dollar
+                = form.text_field :discount, class: 'form-control form-control-lg', placeholder: 'Discount'
+          .modal-footer
+            %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Cancel
+            %button.btn.btn-primary{:type => "submit"} Save

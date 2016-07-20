@@ -1,0 +1,44 @@
+%br
+%p
+  %b First name:
+  = @customer.first_name
+%p
+  %b Last name:
+  = @customer.last_name
+%p
+  %b Business name:
+  = @customer.business_name
+%p
+  %b Email:
+  = @customer.email
+%p
+  %b Address1:
+  = @customer.address1
+%p
+  %b Address2:
+  = @customer.address2
+%p
+  %b City:
+  = @customer.city
+%p
+  %b State:
+  = @customer.state
+%p
+  %b Zip:
+  = @customer.zip
+%p
+  %b Phone:
+  = @customer.phone
+%p
+  %b Id number:
+  = @customer.id_number
+%p
+  %b Id state:
+  = @customer.id_state
+%p
+  %b Id expiration:
+  = @customer.id_expiration
+
+= link_to 'Edit', edit_customer_path(@customer)
+\|
+= link_to 'Back', customers_path

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gross: 9.99
+  tare: 9.99
+  price: 9.99
+  total: 9.99
+  commodity_id: 1
+  transaction_id: 1
+
+two:
+  gross: 9.99
+  tare: 9.99
+  price: 9.99
+  total: 9.99
+  commodity_id: 1
+  transaction_id: 1

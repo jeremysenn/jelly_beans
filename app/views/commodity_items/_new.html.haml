@@ -1,0 +1,22 @@
+= form_for(CommodityItem.new, remote: true) do |form|
+  Commodity Item:
+  %br
+  .field
+    = form.label :gross
+    = form.text_field :gross
+  .field
+    = form.label :tare
+    = form.text_field :tare
+  .field
+    = form.label :price
+    = form.text_field :price
+  .field
+    = form.label :total
+    = form.text_field :total
+  .field
+    = form.label :commodity_id
+    = form.number_field :commodity_id
+  .field
+    = form.label :transaction_id
+    = form.number_field :transaction_id, value: @transaction.id
+  = form.submit

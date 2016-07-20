@@ -1,0 +1,48 @@
+%br
+
+- unless @customers.blank?
+  %table.table
+    %thead
+      %tr
+        %th First name
+        %th Last name
+        %th Business name
+        %th Email
+        %th Address1
+        %th Address2
+        %th City
+        %th State
+        %th Zip
+        %th Phone
+        %th Id number
+        %th Id state
+        %th Id expiration
+        %th
+        %th
+        %th
+
+    %tbody
+      - @customers.each do |customer|
+        %tr
+          %td= customer.first_name
+          %td= customer.last_name
+          %td= customer.business_name
+          %td= customer.email
+          %td= customer.address1
+          %td= customer.address2
+          %td= customer.city
+          %td= customer.state
+          %td= customer.zip
+          %td= customer.phone
+          %td= customer.id_number
+          %td= customer.id_state
+          %td= customer.id_expiration
+          %td= link_to 'Show', customer
+          %td= link_to 'Edit', edit_customer_path(customer)
+          %td= link_to 'Destroy', customer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+- else
+  %p.lead No customers yet
+
+%br
+
+= link_to 'New Customer', new_customer_path

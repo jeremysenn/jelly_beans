@@ -1,0 +1,80 @@
+%br
+
+%div.row
+  .col-xs-4
+    %a.btn.btn-warning.btn-lg.btn-block{:href => "#", "data-toggle" => "modal", "data-target" => "#add_commodity_item", :role => "button"} Receipt
+  .col-xs-4
+    = form_for(@transaction, remote: true) do |form|
+      = form.hidden_field :status, value: 'Void'
+      %button.btn.btn-danger.btn-lg.btn-block{:type => "submit"}
+        Void
+  .col-xs-4
+    %a.btn.btn-primary.btn-lg.btn-block{href: edit_transaction_path(@transaction), :role => "button"} Edit
+
+%br
+
+%p.lead Details
+%div.card-group
+  %div.card
+    %ul.list-group.list-group-flush
+      %li.list-group-item
+        Number
+        .pull-right= @transaction.id
+      %li.list-group-item
+        Date
+        .pull-right= @transaction.updated_at.strftime("%m/%d/%y, %l:%M %p")
+      %li.list-group-item
+        Status
+        .pull-right= @transaction.status
+      %li.list-group-item
+        Customer
+        .pull-right= link_to @transaction.customer.full_name, @transaction.customer
+  %div.card
+    %ul.list-group.list-group-flush
+      %li.list-group-item
+        Subtotal
+        .pull-right= number_to_currency(@transaction.sub_total)
+      %li.list-group-item
+        Discount
+        .pull-right= number_to_currency("#{@transaction.discount.blank? ? 0 : @transaction.discount}")
+      %li.list-group-item
+        = "Tax #{@transaction.tax.blank? ? '' : '(' + number_to_percentage(@transaction.tax, precision: 2) + ')'}"
+        .pull-right= number_to_currency(@transaction.tax_amount)
+      %li.list-group-item
+        %strong Total
+        .pull-right
+          %strong= number_to_currency("#{@transaction.total.blank? ? 0 : @transaction.total}")
+%br
+%p.lead Items
+- unless @transaction.commodity_items.blank?
+  %div.card
+    %ul.list-group.list-group-flush
+      - @transaction.commodity_items.each do |commodity_item|
+        %li.list-group-item 
+          = commodity_item.commodity.name
+          .pull-right
+            = number_to_currency(commodity_item.commodity.price)
+          %br
+          %small
+            .text-muted= commodity_item.commodity.unit_of_measure
+- else
+  %p.lead No commodity items
+
+%br
+%p.lead Attachments
+- unless @transaction.attachments.blank?
+  %div.card
+    %ul.list-group.list-group-flush
+      - @transaction.attachments.each do |attachment|
+        %li.list-group-item 
+          = attachment.name
+          .pull-right
+            = link_to 'Download', download_attachment_path(attachment)
+- else
+  %p.lead No attachments
+   
+-#
+  .col-xs-12
+    = link_to 'Edit', edit_transaction_path(@transaction)
+    \|
+    = link_to 'Back', transactions_path

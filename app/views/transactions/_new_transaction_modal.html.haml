@@ -1,0 +1,14 @@
+#new_transaction.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "new_transaction_label", :role => "dialog"}
+  .modal-dialog.modal-sm{:role => "document"}
+    .modal-content
+      .modal-body
+        = form_for Transaction.new do |form|
+          = form.hidden_field :user_id, value: current_user.id
+          = form.hidden_field :category, value: 'Sale'
+          = form.hidden_field :status, value: 'Incomplete'
+          .form-group.row
+            .col-sm-12
+              = form.select :customer_id, options_from_collection_for_select(current_company.customers, :id, :full_name), {prompt: "Select customer"}, {style: 'width: 100%', :class => "form-control form-control-lg"}
+          .modal-footer
+            %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Cancel
+            %button.btn.btn-primary{:type => "submit"} Go

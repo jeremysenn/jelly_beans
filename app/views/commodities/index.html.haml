@@ -1,0 +1,33 @@
+%br
+- unless @commodities.blank?
+  %table.table.table-responsive
+    %thead
+      %tr
+        %th Name
+        %th Price
+        %th Description
+        %th Unit of measure
+        %th Category
+        %th Active
+        %th
+        %th
+        %th
+
+    %tbody
+      - @commodities.each do |commodity|
+        %tr
+          %td= commodity.name
+          %td= number_to_currency(commodity.price)
+          %td= commodity.description
+          %td= commodity.unit_of_measure
+          %td= commodity.category
+          %td= commodity.active
+          %td= link_to 'Show', commodity
+          %td= link_to 'Edit', edit_commodity_path(commodity)
+          %td= link_to 'Destroy', commodity, :method => :delete, :data => { :confirm => 'Are you sure?' }
+- else
+  %p.lead No commodities yet
+
+%br
+
+= link_to 'New Commodity', new_commodity_path

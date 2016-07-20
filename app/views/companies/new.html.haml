@@ -1,0 +1,31 @@
+%br
+= form_for @company do |f|
+  - if @company.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@company.errors.count, "error")} prohibited this company from being saved:"
+      %ul
+        - @company.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group.row
+    %label.required.col-sm-2.form-control-label{:for => "name"} Company Name
+    .col-sm-6
+      = f.text_field :name, class: 'form-control form-control-lg', placeholder: 'Company Name', required: true
+  = f.fields_for :users do |users_form|
+    .form-group.row
+      %label.required.col-sm-2.form-control-label{:for => "name"} First Name
+      .col-sm-6
+        = users_form.text_field :first_name, class: 'form-control form-control-lg', placeholder: 'First Name', required: true
+    .form-group.row
+      %label.required.col-sm-2.form-control-label{:for => "name"} Last Name
+      .col-sm-6
+        = users_form.text_field :last_name, class: 'form-control form-control-lg', placeholder: 'Last Name', required: true
+    .form-group.row
+      %label.required.col-sm-2.form-control-label{:for => "email"} Email
+      .col-sm-6
+        = users_form.text_field :email, class: 'form-control form-control-lg', placeholder: 'Email', required: true
+  .form-group.row
+    .col-sm-offset-2.col-sm-10
+      %button.btn.btn-primary.btn-lg{:type => "submit"} Sign up
+
+
+= link_to 'Back', companies_path

@@ -1,0 +1,28 @@
+= form_for @commodity_item do |f|
+  - if @commodity_item.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@commodity_item.errors.count, "error")} prohibited this commodity_item from being saved:"
+      %ul
+        - @commodity_item.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :gross
+    = f.text_field :gross
+  .field
+    = f.label :tare
+    = f.text_field :tare
+  .field
+    = f.label :price
+    = f.text_field :price
+  .field
+    = f.label :total
+    = f.text_field :total
+  .field
+    = f.label :commodity_id
+    = f.number_field :commodity_id
+  .field
+    = f.label :transaction_id
+    = f.number_field :transaction_id
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,43 @@
+= form_for @commodity do |f|
+  - if @commodity.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@commodity.errors.count, "error")} prohibited this commodity from being saved:"
+      %ul
+        - @commodity.errors.full_messages.each do |msg|
+          %li= msg
+  = f.hidden_field :company_id, value: current_company.id
+  .form-group.row
+    %label.required.col-sm-2.form-control-label{:for => "name"} Name
+    .col-sm-6
+      = f.text_field :name, class: 'form-control form-control-lg', placeholder: 'Commodity Name', required: true
+  .form-group.row
+    %label.col-sm-2.form-control-label{:for => "price"} Price
+    .col-sm-3
+      = f.text_field :price, class: 'form-control form-control-lg', placeholder: 'Commodity Price', required: true
+  .form-group.row
+    %label.col-sm-2.form-control-label{:for => "description"} Description
+    .col-sm-6
+      = f.text_area :description, class: 'form-control form-control-lg', placeholder: 'Commodity Description'
+  .form-group.row
+    %label.col-sm-2.form-control-label{:for => "unit_of_measure"} Unit of Measure
+    .col-sm-3
+      = f.select :unit_of_measure, options_for_select(units_of_measure), class: "form-control form-control-lg", required: true
+  .radio-inline
+    %label
+      = f.radio_button :category, 'Indica', required: true
+      Indica
+  .radio-inline
+    %label
+      = f.radio_button :category, 'Hybrid'
+      Hybrid
+  .radio-inline
+    %label
+      = f.radio_button :category, 'Sativa'
+      Sativa
+  .checkbox
+    %label
+      = f.check_box :active
+      Active
+  .form-group.row
+    .col-sm-offset-2.col-sm-10
+      %button.btn.btn-primary.btn-lg{:type => "submit"} Save
