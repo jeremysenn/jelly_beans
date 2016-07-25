@@ -4,6 +4,7 @@
 
 jQuery ->
   $(document).on "turbolinks:load", ->
+    alert "page has loaded!"
     # Dropdown select for transaction's customer
     $('#transaction_customer_id').select2
       theme: 'bootstrap'
