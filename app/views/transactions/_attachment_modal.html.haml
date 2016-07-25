@@ -1,5 +1,5 @@
 #attachment.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "attachment_label", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog.modal-sm{:role => "document"}
+  .modal-dialog{:role => "document"}
     .modal-content
       .modal-body
         = form_for Attachment.new do |form|
@@ -14,6 +14,13 @@
           .form-group.row
             .col-sm-12
               = form.file_field :file
+          - unless @transaction.attachments.blank?
+            %p.lead Attachments
+            %div.card
+              %ul.list-group.list-group-flush
+                - @transaction.attachments.each do |attachment|
+                  %li.list-group-item 
+                    = attachment.name
           .modal-footer
             %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Cancel
             %button.btn.btn-primary{:type => "submit"} Save

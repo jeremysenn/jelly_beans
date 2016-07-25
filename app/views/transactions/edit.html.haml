@@ -30,6 +30,9 @@
     .card
       %ul.list-group.list-group-flush
         %li.list-group-item
+          Customer
+          .pull-right= @transaction.customer.full_name
+        %li.list-group-item
           Subtotal
           .pull-right= number_to_currency(@transaction.sub_total)
         %li.list-group-item
@@ -39,11 +42,17 @@
           = "Tax #{@transaction.tax.blank? ? '' : '(' + number_to_percentage(@transaction.tax, precision: 2) + ')'}"
           .pull-right= number_to_currency(@transaction.tax_amount)
   .col-xs-12.col-md-4
-    = form_for(@transaction, remote: true) do |form|
-      = form.hidden_field :status, value: 'Complete'
-      %button.btn.btn-primary.btn-lg.btn-block{:type => "submit"}
-        Charge
-        = number_to_currency(@transaction.sub_total - @transaction.discount - @transaction.tax_amount)
+    - unless @transaction.sub_total.blank? or @transaction.sub_total.zero?
+      = form_for(@transaction, remote: true) do |form|
+        = form.hidden_field :status, value: 'Complete'
+        %button.btn.btn-primary.btn-lg.btn-block{:type => "submit"}
+          %br
+          %br
+          Charge
+          = number_to_currency(@transaction.sub_total - @transaction.discount - @transaction.tax_amount)
+          %br
+          %br
+          %br
     -#
       .card.card-inverse.card-success.text-xs-center
         .card-block
