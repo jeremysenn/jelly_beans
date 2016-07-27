@@ -11,7 +11,7 @@
           = form.hidden_field :transaction_id, value: @transaction.id
           .form-group.row
             .col-sm-12
-              = form.select :commodity_id, options_from_collection_for_select(current_company.commodities, :id, :name), {prompt: "Select commodity"}, {style: 'width: 100%', :class => "form-control form-control-lg"}
+              = form.select :commodity_id, options_from_collection_for_select(current_company.commodities, :id, :name), {prompt: "Select commodity"}, {autofocus: true, style: 'width: 100%', :class => "form-control form-control-lg"}
           -#
             .form-group.row
               .col-sm-12

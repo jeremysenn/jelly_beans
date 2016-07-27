@@ -7,7 +7,7 @@
           = form.hidden_field :attached_item_type, value: @transaction.class.name
           .form-group.row
             .col-sm-12
-              = form.text_field :name, class: 'form-control form-control-lg', placeholder: 'Name'
+              = form.text_field :name, class: 'form-control form-control-lg', placeholder: 'Name', autofocus: true
           .form-group.row
             .col-sm-12
               = form.text_area :description, class: 'form-control form-control-lg', placeholder: 'Description'

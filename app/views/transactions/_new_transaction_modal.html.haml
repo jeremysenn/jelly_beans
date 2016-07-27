@@ -8,7 +8,7 @@
           = form.hidden_field :status, value: 'Incomplete'
           .form-group.row
             .col-sm-12
-              = form.select :customer_id, options_from_collection_for_select(current_company.customers, :id, :full_name), {prompt: "Select customer"}, {style: 'width: 100%', :class => "form-control form-control-lg"}
+              = form.select :customer_id, options_from_collection_for_select(current_company.customers, :id, :full_name), {prompt: "Select customer"}, {autofocus: true, style: 'width: 100%', :class => "form-control form-control-lg"}
           .modal-footer
             %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Cancel
             %button.btn.btn-primary{:type => "submit"} Go
