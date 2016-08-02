@@ -42,7 +42,8 @@ jQuery ->
       workstation_id = $(this).data( "workstation-id" )
       spinner_icon = $(this).find('.fa-spinner')
       spinner_icon.show()
-      $(this).addClass( "disabled" )
+      charge_button = $(this)
+      charge_button.addClass( "disabled" )
       $.ajax
         url: "/devices/pos_payment"
         dataType: 'json'
@@ -60,17 +61,13 @@ jQuery ->
           else if response is '612'
             $(this).removeClass( "disabled" )
             alert "Insuffcient funds."
-            $.rails.enableElement $(this)
           else
-            $(this).removeClass( "disabled" )
+            charge_button.removeClass( "disabled" )
             alert "Debit of $" + amount.toFixed(2) + " was not approved."
-            $.rails.enableElement $(this)
-          $.rails.enableElement $(this)
           return
         error: (xhr, status, err) ->
-          $(this).removeClass( "disabled" )
+          charge_button.removeClass( "disabled" )
           spinner_icon.hide()
           alert 'Error calling Hypercom: ' + status
-          $.rails.enableElement $(this)
           return
       return
