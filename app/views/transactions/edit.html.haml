@@ -68,18 +68,30 @@
         %li.list-group-item
           = "Tax #{@transaction.tax.blank? ? '' : '(' + number_to_percentage(@transaction.tax, precision: 2) + ')'}"
           .pull-right= number_to_currency(@transaction.tax_amount)
+        %li.list-group-item
+          %strong
+            Total
+            .pull-right= number_to_currency(@transaction.sub_total - @transaction.discount - @transaction.tax_amount)
   .col-xs-12.col-md-4
     - unless @transaction.sub_total.blank? or @transaction.sub_total.zero?
-      = form_for(@transaction, remote: true) do |form|
-        = form.hidden_field :status, value: 'Complete'
-        %button.btn.btn-primary.btn-lg.btn-block{:type => "submit"}
-          %br
-          %br
-          Charge
-          = number_to_currency(@transaction.sub_total - @transaction.discount - @transaction.tax_amount)
-          %br
-          %br
-          %br
+      %div.row
+        .col-xs-12
+          %a.btn.btn-warning.btn-lg.btn-block{href: '#'}
+            %br
+            Check ATM
+            %br
+            %br
+      %br
+      %div.row
+        .col-xs-12
+          = form_for(@transaction, remote: true) do |form|
+            = form.hidden_field :status, value: 'Complete'
+            %button.btn.btn-primary.btn-lg.btn-block{:type => "submit"}
+              %br
+              Charge
+              = number_to_currency(@transaction.sub_total - @transaction.discount - @transaction.tax_amount)
+              %br
+              %br
     -#
       .card.card-inverse.card-success.text-xs-center
         .card-block

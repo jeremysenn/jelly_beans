@@ -47,6 +47,9 @@ gem "select2-rails"
 gem 'carrierwave'
 gem 'mini_magick'
 
+# SOAP calls (TUD devices web service calls)
+gem 'savon'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
