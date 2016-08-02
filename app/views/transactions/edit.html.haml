@@ -74,22 +74,27 @@
             .pull-right= number_to_currency(@transaction.sub_total - @transaction.discount - @transaction.tax_amount)
   .col-xs-12.col-md-4
     - unless @transaction.sub_total.blank? or @transaction.sub_total.zero?
-      %div.row
-        .col-xs-12
-          %a.btn.btn-warning.btn-lg.btn-block{href: '#'}
-            %br
-            Check ATM
-            %br
-            %br
+      -#
+        %div.row
+          .col-xs-12
+            %a.btn.btn-warning.btn-lg.btn-block{href: '#'}
+              %br
+              Check ATM
+              %br
+              %br
       %br
       %div.row
         .col-xs-12
           = form_for(@transaction, remote: true) do |form|
             = form.hidden_field :status, value: 'Complete'
-            %button.btn.btn-primary.btn-lg.btn-block{:type => "submit"}
+            -# %button.btn.btn-primary.btn-lg.btn-block{:type => "submit"}
+            %a.btn.btn-primary.btn-lg.btn-block{href: nil, id: 'hypercom_charge_button', "data-workstation-id" => 1,  "data-amount" => (@transaction.sub_total - @transaction.discount - @transaction.tax_amount).round(2)}
               %br
+              %br
+              %i.fa.fa-spinner.fa-lg.fa-spin{style: 'display:none;'}
               Charge
               = number_to_currency(@transaction.sub_total - @transaction.discount - @transaction.tax_amount)
+              %br
               %br
               %br
     -#

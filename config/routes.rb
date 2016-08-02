@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   
+  resources :devices do
+    collection do
+      get :pos_payment
+    end
+  end
+  
   resources :attachments do
     member do
       get :download
