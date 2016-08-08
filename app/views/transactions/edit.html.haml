@@ -88,7 +88,7 @@
           = form_for(@transaction, remote: true) do |form|
             = form.hidden_field :status, value: 'Complete'
             -# %button.btn.btn-primary.btn-lg.btn-block{:type => "submit"}
-            %a.btn.btn-primary.btn-lg.btn-block{href: nil, id: 'hypercom_charge_button', "data-workstation-id" => 1,  "data-amount" => (@transaction.sub_total - @transaction.discount - @transaction.tax_amount).round(2)}
+            %a.btn.btn-primary.btn-lg.btn-block{href: nil, id: 'hypercom_charge_button', "data-workstation-id" => 2,  "data-amount" => (@transaction.sub_total - @transaction.discount - @transaction.tax_amount).round(2)}
               %br
               %br
               %i.fa.fa-spinner.fa-lg.fa-spin{style: 'display:none;'}
