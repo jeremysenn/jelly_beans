@@ -54,8 +54,10 @@ jQuery ->
         success: (data) ->
           spinner_icon.hide()
           response = data.response
+          tran_id = data.tranid
           if response is '0'
             alert "Debit of $" + amount.toFixed(2) + " approved."
+            $('#transaction_ez_cash_tran_id').val tran_id
             $('.edit_transaction').submit (event) ->
               return
           else if response is '612'

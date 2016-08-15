@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720192035) do
+ActiveRecord::Schema.define(version: 20160812141243) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "name"
@@ -86,11 +86,12 @@ ActiveRecord::Schema.define(version: 20160720192035) do
     t.integer  "user_id"
     t.string   "category"
     t.string   "status"
-    t.decimal  "discount",    default: "0.0"
-    t.decimal  "tax",         default: "0.0"
+    t.decimal  "discount",        default: "0.0"
+    t.decimal  "tax",             default: "0.0"
     t.decimal  "total"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "ez_cash_tran_id"
   end
 
   create_table "users", force: :cascade do |t|
