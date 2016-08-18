@@ -47,7 +47,8 @@ class Device < ActiveRecord::Base
     client = Savon.client(wsdl: 'http://www.heavymetalcard.com/checkservice/checkservice.dll/wsdl/ICheckService')
     response = client.call(:pos_payment, xml: xml_string)
     data = response.to_hash
-    return data[:pos_payment_response][:return]
+#    return data[:pos_payment_response][:return]
+    return data[:pos_payment_response]
   end
   
 end
